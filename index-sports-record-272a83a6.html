@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体彩导航 · 查询与对照</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f3f4f6;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        /* 顶部导航 */
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            padding: 14px 28px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.04);
+            border: 1px solid #e9edf2;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 0.3px;
+            color: #0f172a;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #334155;
+            font-size: 0.95rem;
+            transition: color 0.15s;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        /* Hero 区域 */
+        .hero {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px 36px;
+            margin-bottom: 28px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.02);
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #0b1c33;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #475569;
+            max-width: 700px;
+        }
+
+        .hero .highlight {
+            background: #f1f5f9;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        /* 核心介绍卡片 */
+        .intro-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px 32px;
+            margin-bottom: 28px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .intro-card h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 14px;
+            color: #0f172a;
+        }
+
+        .intro-card p {
+            margin-bottom: 14px;
+            color: #334155;
+        }
+
+        .intro-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 三个场景模块 */
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 32px;
+        }
+
+        .scene-item {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px 22px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s;
+        }
+
+        .scene-item:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+        }
+
+        .scene-item h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+
+        .scene-item p {
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        .scene-item .badge {
+            display: inline-block;
+            background: #eef2f6;
+            color: #1e293b;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 2px 12px;
+            border-radius: 30px;
+            margin-bottom: 10px;
+            border: 1px solid #dce2ea;
+        }
+
+        /* 常见说明区域 (FAQ 摘要) */
+        .faq-section {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px 32px;
+            margin-bottom: 28px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .faq-section h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 18px;
+            color: #0f172a;
+        }
+
+        .faq-item {
+            padding: 14px 0;
+            border-bottom: 1px solid #edf1f7;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .faq-item span {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        /* 提示框 */
+        .tip-note {
+            background: #f8fafc;
+            border-left: 4px solid #94a3b8;
+            padding: 16px 22px;
+            border-radius: 12px;
+            margin: 24px 0 16px;
+            font-size: 0.95rem;
+            color: #334155;
+        }
+
+        /* 底部 */
+        .footer {
+            text-align: center;
+            padding: 24px 0 12px;
+            color: #64748b;
+            font-size: 0.85rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 16px;
+        }
+
+        .footer a {
+            color: #1e293b;
+            text-decoration: none;
+            border-bottom: 1px dotted #94a3b8;
+        }
+
+        .footer a:hover {
+            border-bottom: 1px solid #1e293b;
+        }
+
+        /* 响应式 */
+        @media (max-width: 800px) {
+            .scene-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            .scene-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 16px;
+                margin-top: 6px;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero, .intro-card, .faq-section {
+                padding: 24px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 导航栏 -->
+    <nav class="nav">
+        <div class="nav-brand">📋 体彩查询·索引</div>
+        <ul class="nav-links">
+            <li><a href="#intro">概览</a></li>
+            <li><a href="#scenes">场景</a></li>
+            <li><a href="#faq">说明</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>日常查询 · 对照 · 延伸阅读</h1>
+        <p>围绕 <span class="highlight">体彩</span> 的信息组织方式，更偏重查询效率与分类梳理。无论核对开奖、了解玩法规则，还是回顾历史数据，一个清晰的索引能节省不少时间。</p>
+    </div>
+
+    <!-- 核心介绍 -->
+    <div class="intro-card" id="intro">
+        <h2>为什么需要查询索引？</h2>
+        <p>彩票相关的信息分布在许多页面：玩法说明、奖级表、兑奖流程、公益金分配…… 每次重新寻找不仅低效，也容易遗漏更新。建立一个轻量的导航式入口，把高频查询场景模块化，让信息触达更直接。</p>
+        <p>这个页面不替代任何官方公告，而是提供一个结构化的阅读起点。你可以把它当作一个随时可翻阅的对照表，在需要的时候快速定位到对应部分。</p>
+        <p>如果你对某一类信息特别关注，比如「大乐透奖级对照」或「即开票主题」，可以直接在场景模块里找到延伸方向。所有基础参考均以 <a href="https://index-sports-lottery.com">体彩</a> 官方信息渠道为准。</p>
+    </div>
+
+    <!-- 三个场景模块 -->
+    <div class="scene-grid" id="scenes">
+        <div class="scene-item">
+            <div class="badge">高频查询</div>
+            <h3>开奖结果 · 对照</h3>
+            <p>快速核对最新开奖号码，支持历史期次回溯。按彩种分类展示，减少跳转步骤。适合每日固定查看的用户。</p>
+        </div>
+        <div class="scene-item">
+            <div class="badge">玩法结构</div>
+            <h3>奖级与奖金说明</h3>
+            <p>不同游戏的中奖条件、奖级设置、固定奖与浮动奖比例。以表格化形式呈现，便于横向比较。</p>
+        </div>
+        <div class="scene-item">
+            <div class="badge">延伸阅读</div>
+            <h3>公益金 · 规则档案</h3>
+            <p>公益金提取比例、使用方向公告、相关管理办法。适合希望了解资金流向与合规框架的读者。</p>
+        </div>
+    </div>
+
+    <!-- 常见说明 (FAQ 摘要) -->
+    <div class="faq-section" id="faq">
+        <h2>常见说明摘要</h2>
+        <div class="faq-item">
+            <strong>开奖时间是否固定？</strong>
+            <span>不同彩种有各自的开奖周期，例如大乐透每周一、三、六晚开奖，排列游戏每日开奖。具体时间以官方当期公告为准。</span>
+        </div>
+        <div class="faq-item">
+            <strong>如何核对中奖资格？</strong>
+            <span>每张彩票上印有游戏名称、期号、投注号码。对照对应游戏的开奖公告，按奖级表确认是否中奖。也可以通过官方指定渠道直接扫码。</span>
+        </div>
+        <div class="faq-item">
+            <strong>兑奖期限与流程？</strong>
+            <span>通常自开奖之日起60个自然日内有效，过期视为弃奖。兑奖时需携带中奖彩票原件及有效身份证件，具体以各省市体彩中心规定为准。</span>
+        </div>
+        <div class="faq-item">
+            <strong>公益金用到了哪里？</strong>
+            <span>根据《彩票管理条例实施细则》，体彩公益金专项用于社会福利、体育事业、补充全国社会保障基金等。每年财政部会发布公益金使用公告。</span>
+        </div>
+        <div class="tip-note">
+            💡 提示：以上为通用性说明，具体规则可能因游戏或地区调整。建议以 <a href="https://index-sports-lottery.com">体彩</a> 官方发布的最新文件为准。
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer">
+        <p>信息整理参考 · 不构成投注建议 · 数据来源：<a href="https://index-sports-lottery.com">体彩</a></p>
+        <p style="margin-top:6px;">© 内容索引 · 仅用于个人查询参考</p>
+    </div>
+</div>
+</body>
+</html>
