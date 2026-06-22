@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bb体育 · 主题信息卡片</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f4f6fa;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+
+    /* 深色头图 hero */
+    .hero {
+      background: linear-gradient(145deg, #0b1120 0%, #1b253b 100%);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      color: #eef0f5;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: -20%;
+      width: 160%;
+      height: 140%;
+      background: radial-gradient(circle at 30% 40%, rgba(46, 134, 222, 0.12), transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      max-width: 640px;
+      margin: 0 auto 1.2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .tagline {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #bbc6de;
+      backdrop-filter: blur(4px);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 浅色正文区 卡片布局 */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .intro-block {
+      background-color: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03), 0 2px 8px rgba(0, 0, 0, 0.02);
+      padding: 2.5rem 2.2rem;
+      margin-bottom: 2.8rem;
+      border: 1px solid #eaedf3;
+    }
+
+    .intro-block p {
+      font-size: 1.05rem;
+      color: #2c3e50;
+    }
+
+    .intro-block a {
+      color: #1d6f9c;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border 0.2s, color 0.2s;
+    }
+
+    .intro-block a:hover {
+      color: #0a4c6e;
+      border-bottom: 1px solid #0a4c6e;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin: 2.8rem 0 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 1.8rem 1.6rem 2rem;
+      box-shadow: 0 4px 14px rgba(0, 20, 40, 0.04);
+      border: 1px solid #e6e9f0;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.01em;
+      color: #141e2c;
+      position: relative;
+      padding-left: 0.9rem;
+    }
+
+    .card h3::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.25rem;
+      width: 4px;
+      height: 1.2rem;
+      background: #2e86c1;
+      border-radius: 4px;
+    }
+
+    .card p, .card ul {
+      font-size: 0.98rem;
+      color: #334155;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.3rem;
+      position: relative;
+    }
+
+    .card li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: #2e86c1;
+    }
+
+    /* 自然链接段落 (faq / 场景) */
+    .link-paragraph {
+      background: #eef3f9;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0;
+      border-left: 5px solid #2e86c1;
+    }
+
+    .link-paragraph p {
+      font-size: 1.02rem;
+      color: #1f2a3f;
+      margin-bottom: 0.5rem;
+    }
+
+    .link-paragraph a {
+      color: #1d6f9c;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px dashed #8bb7d4;
+      transition: border 0.2s;
+    }
+
+    .link-paragraph a:hover {
+      border-bottom: 1px solid #0a4c6e;
+    }
+
+    .faq-mini {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.6rem 1.8rem;
+      margin-top: 2.4rem;
+      border: 1px solid #dee4ed;
+    }
+
+    .faq-mini h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: #111d2b;
+    }
+
+    .faq-mini details {
+      margin-bottom: 0.6rem;
+      border-bottom: 1px solid #ecf0f5;
+      padding-bottom: 0.6rem;
+    }
+
+    .faq-mini summary {
+      font-weight: 500;
+      cursor: pointer;
+      color: #1f3a4b;
+      padding: 0.2rem 0;
+    }
+
+    .faq-mini summary::-webkit-details-marker {
+      color: #2e86c1;
+    }
+
+    .faq-mini .answer {
+      padding: 0.5rem 0 0.2rem 1rem;
+      color: #374151;
+      font-size: 0.95rem;
+    }
+
+    /* 强调色用于链接 (已在上方体现) */
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #6b7a8f;
+      border-top: 1px solid #d9e0ea;
+      padding-top: 2rem;
+      margin-top: 3rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 680px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero {
+        padding: 3.2rem 1rem 2.8rem;
+      }
+      .intro-block {
+        padding: 1.8rem 1.2rem;
+      }
+      .card-grid {
+        gap: 1.2rem;
+      }
+      .link-paragraph {
+        padding: 1.2rem 1.2rem;
+      }
+      .faq-mini {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头图 -->
+  <header class="hero">
+    <h1>bb体育 · 信息卡片</h1>
+    <p class="sub">从运动项目、赛事数据到社区交流，主题式聚合整理，帮助爱好者快速定位感兴趣的内容区域。</p>
+    <span class="tagline">✨ 场景化 · 卡片式 · 简洁呈现</span>
+  </header>
+
+  <!-- 浅色正文区 -->
+  <div class="container">
+
+    <!-- 主视觉 / 用途卡片 -->
+    <div class="intro-block">
+      <p>
+        <strong>bb体育</strong> 是一个围绕体育内容展开的信息入口，覆盖足球、篮球、网球、电子竞技等多个主流项目。页面以卡片形式梳理不同维度的功能用途，你可以根据自己的关注点（赛事追踪、数据查询、社区讨论）直接跳转到对应模块。本文介绍页旨在用平实的语言把 <a href="https://main-bbsport.com">bb体育</a> 所涉及的主题类别、使用场景以及适合人群整理清楚，方便新用户或感兴趣的人快速建立认知。
+      </p>
+    </div>
+
+    <!-- 用途卡片 + 适合人群 (合并为卡片网格) -->
+    <div class="card-grid">
+      <div class="card">
+        <h3>用途 · 赛事与数据</h3>
+        <p>提供主流联赛、杯赛的实时比分、赛程、积分榜以及球员统计。数据更新频率较高，适合需要快速获取比赛动态的用户。</p>
+        <ul>
+          <li>五大联赛 / NBA / 欧冠</li>
+          <li>技术统计与历史交锋</li>
+          <li>自定义关注球队或选手</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>用途 · 主题内容</h3>
+        <p>围绕体育事件形成专题页面，例如赛季回顾、转会汇总、战术分析、装备测评等。内容由编辑整理，结构清晰。</p>
+        <ul>
+          <li>深度图文与短讯结合</li>
+          <li>热门话题聚合</li>
+          <li>视频/动图集锦</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>适合人群</h3>
+        <p>无论是常年关注体育的资深球迷，还是偶尔想了解赛果的轻度用户，都能在分类中找到适合自己的内容节奏。</p>
+        <ul>
+          <li>🏀 篮球 &amp; 足球爱好者</li>
+          <li>🎾 网球 / 格斗 / 电竞观众</li>
+          <li>📊 数据控与策略研究者</li>
+          <li>📱 移动端快速浏览用户</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 自然链接段落 (嵌入 bb体育) -->
+    <div class="link-paragraph">
+      <p><strong>场景举例：</strong> 周末晚上想确认英超积分变化，或者查看某球员最近的出场时间 —— 可以直接打开 <a href="https://main-bbsport.com">bb体育</a> 的对应板块，数据与资讯都按项目归类，省去反复搜索的麻烦。页面没有多余弹窗或诱导操作，信息呈现比较直接。</p>
+      <p style="margin-top:0.8rem;">如果你对某个运动项目的深层数据或话题感兴趣，也可以通过站内的主题标签进行延伸阅读，内容之间彼此关联但不杂乱。</p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+      <h4>常见问题摘要</h4>
+      <details>
+        <summary>bb体育 覆盖哪些运动项目？</summary>
+        <div class="answer">目前以足球、篮球、网球、电竞为核心，同时包含橄榄球、棒球、综合格斗等项目的部分内容。项目列表会随赛季或热点动态调整。</div>
+      </details>
+      <details>
+        <summary>是否需要注册才能使用？</summary>
+        <div class="answer">大部分数据浏览和资讯阅读无需注册。部分个性化功能（如收藏球队、设置偏好）建议注册账号以保存配置。</div>
+      </details>
+      <details>
+        <summary>内容更新频率如何？</summary>
+        <div class="answer">实时比分和赛程数据为分钟级更新；专题文章、图集通常在每个比赛日之后进行整理。整体时效性偏向实用型。</div>
+      </details>
+    </div>
+
+    <!-- 结尾提示 -->
+    <div class="footer-note">
+      <p>本页为介绍性信息卡片，内容仅供参考。具体功能以实际站点为准。</p>
+    </div>
+  </div>
+
+</body>
+</html>
